@@ -1,0 +1,431 @@
+/* ================================================
+   REGISTER PAGE — Complete Redesign
+   All classes prefixed with reg- to avoid conflicts
+   ================================================ */
+
+/* Page Root — covers entire viewport */
+.reg-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1440 40%, #302b63 70%, #24243e 100%);
+  font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e0e0e0;
+}
+
+/* ---- Animated Background ---- */
+.reg-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.reg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  animation: regFloat 20s infinite ease-in-out;
+}
+
+.reg-orb-1 {
+  width: 550px; height: 550px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  top: -15%; right: -10%;
+}
+
+.reg-orb-2 {
+  width: 450px; height: 450px;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  bottom: -10%; left: -10%;
+  animation-delay: -7s;
+}
+
+.reg-orb-3 {
+  width: 350px; height: 350px;
+  background: linear-gradient(45deg, #f857a6, #ff5858);
+  top: 45%; left: 45%;
+  animation-delay: -14s;
+}
+
+.reg-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+@keyframes regFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(40px, -30px) scale(1.05); }
+  66%      { transform: translate(-30px, 40px) scale(0.95); }
+}
+
+/* ---- Back Nav ---- */
+.reg-nav {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 750px;
+  padding: 24px 20px 0;
+}
+
+.reg-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.reg-back-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* ---- Main Wrapper ---- */
+.reg-main {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 24px 20px 40px;
+}
+
+/* ---- Card ---- */
+.reg-card {
+  width: 100%;
+  max-width: 750px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  backdrop-filter: blur(24px);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  padding: 48px 44px;
+  animation: regCardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes regCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Header ---- */
+.reg-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.reg-icon {
+  position: relative;
+  width: 72px; height: 72px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  background: linear-gradient(135deg, #6c3aed, #a855f7);
+  border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(108, 58, 237, 0.4);
+}
+
+.reg-icon-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  animation: regPulse 2s ease-in-out infinite;
+}
+
+@keyframes regPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.15); opacity: 0; }
+}
+
+.reg-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #c084fc, #818cf8, #22d3ee);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: regGrad 4s ease infinite;
+}
+
+@keyframes regGrad {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.reg-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.reg-quote {
+  position: relative;
+  margin-top: 24px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  border-left: 3px solid #7c3aed;
+}
+
+.reg-quote p {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---- Fieldset ---- */
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.reg-fieldset {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 28px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.reg-fieldset:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.reg-fieldset legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 4px;
+}
+
+.reg-legend-bar {
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #a855f7, #6c3aed);
+}
+
+.reg-optional {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 4px;
+}
+
+/* ---- Fields ---- */
+.reg-field {
+  margin-top: 20px;
+}
+
+.reg-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.reg-field input,
+.reg-field select {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.25s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.reg-field select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.reg-field select option {
+  background: #1e1b4b;
+  color: #fff;
+}
+
+.reg-field input:focus,
+.reg-field select:focus {
+  border-color: #7c3aed;
+  background: rgba(124, 58, 237, 0.08);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.reg-field input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.reg-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+}
+
+/* ---- Row (2 cols) ---- */
+.reg-row {
+  display: flex;
+  gap: 16px;
+}
+
+.reg-row .reg-field {
+  flex: 1;
+}
+
+/* ---- Submit Button ---- */
+.reg-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #6366f1);
+  background-size: 200% 200%;
+  animation: regGrad 4s ease infinite;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.reg-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.12), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.reg-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.5);
+}
+
+.reg-submit:hover::after {
+  transform: translateX(100%);
+}
+
+.reg-submit:active {
+  transform: translateY(0);
+}
+
+/* ---- Footer Quote ---- */
+.reg-footer-quote {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #22d3ee, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Page Footer ---- */
+.reg-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  padding: 24px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.reg-footer p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 3px 0;
+}
+
+.reg-footer p:last-child {
+  color: #a78bfa;
+  font-weight: 500;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .reg-card {
+    padding: 32px 20px;
+    border-radius: 20px;
+  }
+
+  .reg-header h1 {
+    font-size: 24px;
+  }
+
+  .reg-fieldset {
+    padding: 20px 16px;
+  }
+
+  .reg-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .reg-icon {
+    width: 60px; height: 60px;
+    font-size: 28px;
+  }
+}
