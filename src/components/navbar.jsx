@@ -61,7 +61,7 @@ function Navbar() {
             <img src="/LOGO.png" alt="IIC Logo" className="nav-logo-img" />
           </div>
           <div className="nav-brand-text">
-            <span className="nav-title">The Institution's Innovation Council (IIC)</span>
+            <span className="nav-title">IIC-ISL</span>
           </div>
         </a>
         <div className="nav-links" id="navLinks">
