@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1280">
     <title>ISL Engineering College | Event 2026</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -437,8 +437,12 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
     
-    if (currentScroll > lastScroll && currentScroll > 200) {
-        navbar.classList.add('hidden');
+    if (window.innerWidth <= 768) {
+        if (currentScroll > lastScroll && currentScroll > 200) {
+            navbar.classList.add('hidden');
+        } else {
+            navbar.classList.remove('hidden');
+        }
     } else {
         navbar.classList.remove('hidden');
     }
