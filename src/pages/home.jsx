@@ -375,6 +375,10 @@ function Home() {
                 <h4>Designed & Developed By</h4>
                 <div className="team-grid">
                   <div className="team-member">
+                    <span className="member-role">Full-Stack Developer</span>
+                    <span className="member-name">Mohd Asim Saad</span>
+                  </div>
+                  <div className="team-member">
                     <span className="member-role">Website Architecture</span>
                     <span className="member-name">Tamseel Ishteyaque</span>
                   </div>

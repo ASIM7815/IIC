@@ -393,6 +393,21 @@
   backdrop-filter: blur(12px);
 }
 
+.reg-footer-dev {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a78bfa;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.reg-footer-dev strong {
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
 .reg-footer p {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
