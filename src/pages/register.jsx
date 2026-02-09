@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 import '../register.css'
 
 function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
     college: 'ISL ENGINEERING COLLEGE',
@@ -47,17 +48,10 @@ function Register() {
         console.error('Supabase error:', error);
         setMessage({ type: 'error', text: error.message || 'Registration failed' });
       } else {
-        setMessage({ type: 'success', text: 'Registration successful! 🎉' });
-        setFormData({
-          fullName: '',
-          college: 'ISL ENGINEERING COLLEGE',
-          department: '',
-          section: '',
-          rollNumber: '',
-          year: '',
-          phone: '',
-          email: ''
-        });
+        setMessage({ type: 'success', text: 'Registration successful! Redirecting to payment...' });
+        setTimeout(() => {
+          navigate('/payment', { state: data[0] });
+        }, 1500);
       }
     } catch (error) {
       console.error('Error:', error);

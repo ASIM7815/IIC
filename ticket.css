@@ -1,0 +1,250 @@
+body {
+    background: #f2f4f8;
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 20px;
+}
+
+.ticket {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+/* LEFT SIDE */
+.ticket-left {
+    padding: 30px;
+    border-right: 2px dashed #ddd;
+}
+
+.badge {
+    display: inline-block;
+    background: #ffe082;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.event-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f3c88;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.quote {
+    background: #e8f0fe;
+    padding: 12px;
+    border-left: 4px solid #1f3c88;
+    border-radius: 6px;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.info {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.info strong {
+    color: #000;
+}
+
+/* RIGHT SIDE */
+.ticket-right {
+    padding: 30px;
+    text-align: center;
+}
+
+.logo {
+    height: 80px;
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-bottom: 20px;
+    color: #777;
+}
+
+.qr-box {
+    border: 2px dashed #000;
+    padding: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.qr {
+    width: 140px;
+    height: 140px;
+    background: repeating-linear-gradient(45deg, #000, #000 2px, #fff 2px, #fff 4px);
+}
+
+.scan-text {
+    font-size: 12px;
+    color: #e53935;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.meta {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* POSTER AREA */
+.poster {
+    grid-column: span 2;
+    padding: 30px;
+    border-top: 2px dashed #ddd;
+    text-align: center;
+    font-size: 22px;
+    color: #888;
+    height: 220px;
+}
+
+/* TAGS */
+.tags {
+    padding: 15px 30px;
+    font-size: 13px;
+    color: #555;
+}
+
+/* MOBILE */
+
+/* Base improvements */
+.ticket {
+    width: 100%;
+    max-width: 900px;
+}
+
+/* -------- TABLET -------- */
+@media (max-width: 768px) {
+
+    .ticket {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket-left,
+    .ticket-right {
+        padding: 20px;
+    }
+
+    .event-title {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .info {
+        font-size: 14px;
+    }
+
+    .qr {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* -------- MOBILE (REAL FIX) -------- */
+@media (max-width: 480px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .ticket {
+        border-radius: 12px;
+        margin-top: 50px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .ticket-left {
+        padding: 18px;
+        border-bottom: 2px dashed #ddd;
+        
+    }
+
+    .badge {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+
+    .event-title {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        margin-bottom: 14px;
+    }
+
+    .quote {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .info {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    /* Right side */
+    .ticket-right {
+        padding: 18px;
+    }
+
+    .logo {
+        height: 60px;
+        font-size: 11px;
+        margin-bottom: 14px;
+    }
+
+    .qr-box {
+        padding: 8px;
+    }
+
+    .qr {
+        width: 100px;
+        height: 100px;
+    }
+
+    .scan-text {
+        font-size: 11px;
+    }
+
+    .meta {
+        font-size: 12px;
+    }
+
+    /* Poster */
+    .poster {
+        height: 120px;
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .tags {
+        font-size: 11px;
+        padding: 12px 16px;
+        text-align: center;
+    }
+}
