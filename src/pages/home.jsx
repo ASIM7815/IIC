@@ -376,7 +376,7 @@ function Home() {
                 <div className="team-grid">
                   <div className="team-member">
                     <span className="member-role">Full-Stack Developer</span>
-                    <span className="member-name">Mohd Asim Saad</span>
+                    <span className="member-name">MOHD ASIM SAAD</span>
                   </div>
                   <div className="team-member">
                     <span className="member-role">Website Architecture</span>

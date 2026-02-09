@@ -156,7 +156,7 @@ function Register() {
 
       {/* Footer */}
       <footer className="reg-footer">
-        <p className="reg-footer-dev">Full-Stack Developer — <strong>Mohd Asim Saad</strong></p>
+        <p className="reg-footer-dev">Full-Stack Developer — <strong>MOHD ASIM SAAD</strong></p>
         <p>&copy; 2026 ISL Engineering College - Innovation & Incubation Cell</p>
         <p>Built with 💜 by IIC Team</p>
       </footer>
