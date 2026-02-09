@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { supabase } from '../supabaseClient'
 import '../register.css'
 
 function Register() {
@@ -26,15 +27,26 @@ function Register() {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
+      const { data, error } = await supabase
+        .from('registrations')
+        .insert([
+          {
+            full_name: formData.fullName,
+            college: formData.college,
+            department: formData.department,
+            section: formData.section,
+            roll_number: formData.rollNumber,
+            year: formData.year,
+            phone: formData.phone,
+            email: formData.email
+          }
+        ])
+        .select();
 
-      const data = await response.json();
-
-      if (response.ok) {
+      if (error) {
+        console.error('Supabase error:', error);
+        setMessage({ type: 'error', text: error.message || 'Registration failed' });
+      } else {
         setMessage({ type: 'success', text: 'Registration successful! 🎉' });
         setFormData({
           fullName: '',
@@ -46,10 +58,9 @@ function Register() {
           phone: '',
           email: ''
         });
-      } else {
-        setMessage({ type: 'error', text: data.error || 'Registration failed' });
       }
     } catch (error) {
+      console.error('Error:', error);
       setMessage({ type: 'error', text: 'Network error. Please try again.' });
     } finally {
       setLoading(false);
