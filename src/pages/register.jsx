@@ -1,7 +1,60 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import '../register.css'
 
 function Register() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    college: 'ISL ENGINEERING COLLEGE',
+    department: '',
+    section: '',
+    rollNumber: '',
+    year: '',
+    phone: '',
+    email: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage({ type: 'success', text: 'Registration successful! 🎉' });
+        setFormData({
+          fullName: '',
+          college: 'ISL ENGINEERING COLLEGE',
+          department: '',
+          section: '',
+          rollNumber: '',
+          year: '',
+          phone: '',
+          email: ''
+        });
+      } else {
+        setMessage({ type: 'error', text: data.error || 'Registration failed' });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Network error. Please try again.' });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="reg-page">
       {/* Animated Background */}
@@ -38,7 +91,13 @@ function Register() {
           </div>
 
           {/* Form */}
-          <form className="reg-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="reg-form" onSubmit={handleSubmit}>
+            {message.text && (
+              <div className={`reg-message reg-message-${message.type}`}>
+                {message.text}
+              </div>
+            )}
+
             {/* Section: Ticket Details */}
             <fieldset className="reg-fieldset">
               <legend>
@@ -48,18 +107,18 @@ function Register() {
 
               <div className="reg-field">
                 <label htmlFor="fullName">Full Name</label>
-                <input id="fullName" type="text" placeholder="Enter your full name" required />
+                <input id="fullName" name="fullName" type="text" placeholder="Enter your full name" value={formData.fullName} onChange={handleChange} required />
               </div>
 
               <div className="reg-field">
                 <label htmlFor="college">College Name</label>
-                <input id="college" type="text" placeholder="ISL Engineering College" required />
+                <input id="college" name="college" type="text" value="ISL ENGINEERING COLLEGE" readOnly required />
               </div>
 
               <div className="reg-row">
                 <div className="reg-field">
                   <label htmlFor="dept">Department</label>
-                  <select id="dept" required>
+                  <select id="dept" name="department" value={formData.department} onChange={handleChange} required>
                     <option value="">Select Department</option>
                     <option>CSE</option>
                     <option>ECE</option>
@@ -70,11 +129,12 @@ function Register() {
                 </div>
                 <div className="reg-field">
                   <label htmlFor="section">Section</label>
-                  <select id="section">
+                  <select id="section" name="section" value={formData.section} onChange={handleChange}>
                     <option value="">Select Section</option>
                     <option>A</option>
                     <option>B</option>
                     <option>C</option>
+                    <option>D</option>
                   </select>
                 </div>
               </div>
@@ -82,11 +142,11 @@ function Register() {
               <div className="reg-row">
                 <div className="reg-field">
                   <label htmlFor="roll">Roll Number</label>
-                  <input id="roll" type="text" placeholder="Enter roll number" required />
+                  <input id="roll" name="rollNumber" type="text" placeholder="Enter roll number" value={formData.rollNumber} onChange={handleChange} required />
                 </div>
                 <div className="reg-field">
                   <label htmlFor="year">Current Year</label>
-                  <select id="year" required>
+                  <select id="year" name="year" value={formData.year} onChange={handleChange} required>
                     <option value="">Select Year</option>
                     <option>1st Year</option>
                     <option>2nd Year</option>
@@ -98,51 +158,19 @@ function Register() {
 
               <div className="reg-field">
                 <label htmlFor="phone">Phone Number</label>
-                <input id="phone" type="tel" placeholder="Enter phone number" required />
+                <input id="phone" name="phone" type="tel" placeholder="Enter phone number" value={formData.phone} onChange={handleChange} required />
               </div>
 
               <div className="reg-field">
                 <label htmlFor="email">Email ID</label>
-                <input id="email" type="email" placeholder="example@gmail.com" required />
+                <input id="email" name="email" type="email" placeholder="example@gmail.com" value={formData.email} onChange={handleChange} required />
                 <span className="reg-hint">This email will receive a copy of the e-ticket.</span>
               </div>
             </fieldset>
 
-            {/* Section: Event Participation */}
-            <fieldset className="reg-fieldset">
-              <legend>
-                <span className="reg-legend-bar"></span>
-                Event Participation
-                <span className="reg-optional">Optional</span>
-              </legend>
-
-              <div className="reg-field">
-                <label htmlFor="event">Selected Event</label>
-                <select id="event">
-                  <option>R&D Orientation Program</option>
-                </select>
-              </div>
-
-              <div className="reg-row">
-                <div className="reg-field">
-                  <label htmlFor="team">Team Name</label>
-                  <input id="team" type="text" placeholder="If applicable" />
-                </div>
-                <div className="reg-field">
-                  <label htmlFor="members">Team Members</label>
-                  <select id="members">
-                    <option>Individual</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-
             {/* Submit */}
-            <button type="submit" className="reg-submit">
-              <span>Submit Registration</span>
+            <button type="submit" className="reg-submit" disabled={loading}>
+              <span>{loading ? 'Submitting...' : 'Submit Registration'}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </form>
@@ -156,9 +184,7 @@ function Register() {
 
       {/* Footer */}
       <footer className="reg-footer">
-        <p className="reg-footer-dev">Full-Stack Developer — <strong>MOHD ASIM SAAD</strong></p>
-        <p>&copy; 2026 ISL Engineering College - Innovation & Incubation Cell</p>
-        <p>Built with 💜 by IIC Team</p>
+        <p>Made by IIC INNOVATION TEAM WITH LOVE</p>
       </footer>
     </div>
   )
