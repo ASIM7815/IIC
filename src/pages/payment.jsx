@@ -57,7 +57,7 @@ function Payment() {
               className={`pay-btn phonepe-btn ${selectedMethod === 'phonepe' ? 'active' : ''}`}
               onClick={() => handlePayment('phonepe')}
             >
-              <img src="/image.png" alt="PhonePe" className="pay-icon" />
+              <img src="/images.png" alt="PhonePe" className="pay-icon" />
               <div className="pay-content">
                 <span className="pay-name">PhonePe</span>
                 <span className="pay-desc">Pay using PhonePe app</span>
