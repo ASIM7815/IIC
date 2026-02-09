@@ -1,13 +1,34 @@
 import { Pool } from 'pg';
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-  ssl: { rejectUnauthorized: false }
-});
+let pool;
+
+try {
+  pool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: { rejectUnauthorized: false }
+  });
+} catch (error) {
+  console.error('Pool creation error:', error);
+}
 
 export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Check if environment variable exists
+  if (!process.env.POSTGRES_URL) {
+    console.error('POSTGRES_URL not found');
+    return res.status(500).json({ error: 'Database configuration missing' });
   }
 
   const { fullName, college, department, section, rollNumber, year, phone, email } = req.body;
@@ -33,7 +54,11 @@ export default async function handler(req, res) {
       data: result.rows[0]
     });
   } catch (error) {
-    console.error('Database error:', error);
-    return res.status(500).json({ error: 'Registration failed. Please try again.' });
+    console.error('Database error:', error.message);
+    console.error('Error details:', error);
+    return res.status(500).json({ 
+      error: 'Registration failed. Please try again.',
+      details: error.message 
+    });
   }
 }
