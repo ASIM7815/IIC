@@ -8,7 +8,7 @@ function Payment() {
   const registrationData = location.state;
   const [selectedMethod, setSelectedMethod] = useState('');
 
-  const UPI_ID = '7815979515@paytm';
+  const UPI_ID = 'taru29@ibl';
   const AMOUNT = '20';
   const NAME = 'IIC Event Registration';
 
@@ -57,7 +57,7 @@ function Payment() {
               className={`pay-btn phonepe-btn ${selectedMethod === 'phonepe' ? 'active' : ''}`}
               onClick={() => handlePayment('phonepe')}
             >
-              <img src="/images.png" alt="PhonePe" className="pay-icon" />
+              <img src="/image.png" alt="PhonePe" className="pay-icon" />
               <div className="pay-content">
                 <span className="pay-name">PhonePe</span>
                 <span className="pay-desc">Pay using PhonePe app</span>
@@ -90,7 +90,7 @@ function Payment() {
           <div className="payment-footer">
             <div className="secure-info">
               <span className="secure-icon">🔒</span>
-              <p>Secure payment to UPI ID: <strong>7815979515@paytm</strong></p>
+              <p>Secure payment to UPI ID: <strong>taru29@ibl</strong></p>
             </div>
             <p className="confirmation-text">You'll receive confirmation via email after successful payment</p>
           </div>
