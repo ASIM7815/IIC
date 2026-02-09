@@ -321,54 +321,6 @@
   padding-left: 30px;
 }
 
-/* WhatsApp Instruction Section */
-.whatsapp-instruction {
-  background: rgba(37, 211, 102, 0.08);
-  border: 1px solid rgba(37, 211, 102, 0.2);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.instruction-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 8px 0;
-}
-
-.instruction-text {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin: 0 0 16px 0;
-}
-
-.whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 24px;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: white;
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  font-weight: 600;
-  transition: all var(--transition-smooth);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-  background: linear-gradient(135deg, #128C7E, #075E54);
-}
-
-.whatsapp-icon {
-  font-size: 20px;
-}
-
 /* Back Button */
 .back-btn {
   width: 100%;

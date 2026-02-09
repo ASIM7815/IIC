@@ -92,21 +92,6 @@ function Payment() {
               <span className="secure-icon">🔒</span>
               <p>Secure payment to UPI ID: <strong>7815979515@paytm</strong></p>
             </div>
-            
-            <div className="whatsapp-instruction">
-              <p className="instruction-title">📸 Important: Send Payment Screenshot</p>
-              <p className="instruction-text">After payment, please send the screenshot to:</p>
-              <a 
-                href="https://wa.me/917815979515" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="whatsapp-btn"
-              >
-                <span className="whatsapp-icon">💬</span>
-                Send to 7815979515 via WhatsApp
-              </a>
-            </div>
-            
             <p className="confirmation-text">You'll receive confirmation via email after successful payment</p>
           </div>
 
