@@ -31,6 +31,14 @@ export default function Ticket() {
   };
 
   const handleDownloadTicket = async () => {
+    // First, ensure QR code is rendered and get it
+    const qrCanvas = document.querySelector('.qr-container canvas');
+    
+    if (!qrCanvas) {
+      alert('QR code not ready. Please wait a moment and try again.');
+      return;
+    }
+
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -193,11 +201,12 @@ export default function Ticket() {
     pdf.line(qrX + qrSize - 5, qrY + qrSize + 3, qrX + qrSize + 3, qrY + qrSize + 3);
     pdf.line(qrX + qrSize + 3, qrY + qrSize - 5, qrX + qrSize + 3, qrY + qrSize + 3);
 
-    // Get HD QR Code
-    const qrCanvas = document.querySelector('.qr-container canvas');
-    if (qrCanvas) {
-      const qrImage = qrCanvas.toDataURL('image/png', 1.0);
-      pdf.addImage(qrImage, 'PNG', qrX, qrY, qrSize, qrSize, undefined, 'FAST');
+    // Convert QR canvas to high quality image and add to PDF
+    try {
+      const qrImageData = qrCanvas.toDataURL('image/png', 1.0);
+      pdf.addImage(qrImageData, 'PNG', qrX, qrY, qrSize, qrSize, undefined, 'FAST');
+    } catch (error) {
+      console.error('Error adding QR code:', error);
     }
     
     // QR Label
