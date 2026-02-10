@@ -161,7 +161,7 @@ function Register() {
                 </div>
                 <div className="reg-field">
                   <label htmlFor="section">Section</label>
-                  <select id="section" name="section" value={formData.section} onChange={handleChange}>
+                  <select id="section" name="section" value={formData.section} onChange={handleChange} required>
                     <option value="">Select Section</option>
                     <option>A</option>
                     <option>B</option>
