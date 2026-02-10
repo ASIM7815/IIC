@@ -152,6 +152,7 @@ function Register() {
                   <select id="dept" name="department" value={formData.department} onChange={handleChange} required>
                     <option value="">Select Department</option>
                     <option>CSE</option>
+                    <option>IT</option>
                     <option>ECE</option>
                     <option>AIDS</option>
                     <option>MECH</option>
