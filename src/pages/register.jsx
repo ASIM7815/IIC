@@ -48,9 +48,21 @@ function Register() {
         console.error('Supabase error:', error);
         setMessage({ type: 'error', text: error.message || 'Registration failed' });
       } else {
-        setMessage({ type: 'success', text: 'Registration successful! Redirecting to payment...' });
+        setMessage({ type: 'success', text: 'Registration successful!' });
+        // Navigate to ticket page after successful registration with data
         setTimeout(() => {
-          navigate('/payment', { state: data[0] });
+          navigate('/success', { 
+            state: {
+              fullName: formData.fullName,
+              college: formData.college,
+              department: formData.department,
+              section: formData.section,
+              rollNumber: formData.rollNumber,
+              year: formData.year,
+              phone: formData.phone,
+              email: formData.email
+            }
+          });
         }, 1500);
       }
     } catch (error) {

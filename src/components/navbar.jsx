@@ -68,7 +68,6 @@ function Navbar() {
           <a href="#about" className="nav-link">About</a>
           <a href="#details" className="nav-link">Details</a>
           <a href="#venue" className="nav-link">Venue</a>
-          <Link to="/payment" className="nav-link">Payment</Link>
           <Link to="/register" className="nav-link nav-cta">Register Now</Link>
         </div>
         <button className="nav-toggle" id="navToggle" aria-label="Toggle menu">

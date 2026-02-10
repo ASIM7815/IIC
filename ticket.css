@@ -45,14 +45,14 @@ body {
     margin-bottom: 18px;
 }
 
-.quote {
+.description {
     background: #e8f0fe;
     padding: 12px;
     border-left: 4px solid #1f3c88;
     border-radius: 6px;
-    font-style: italic;
     margin-bottom: 20px;
     font-size: 14px;
+    line-height: 1.5;
 }
 
 .info {
@@ -72,14 +72,7 @@ body {
 
 .logo {
     height: 80px;
-    border: 2px dashed #bbb;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
     margin-bottom: 20px;
-    color: #777;
 }
 
 .qr-box {
@@ -197,7 +190,7 @@ body {
         margin-bottom: 14px;
     }
 
-    .quote {
+    .description {
         font-size: 12px;
         padding: 10px;
     }
