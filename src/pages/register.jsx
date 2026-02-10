@@ -208,7 +208,7 @@ function Register() {
 
               <div className="reg-field">
                 <label htmlFor="idea">Tell us briefly about your project and what kind of support you're looking for</label>
-                <span className="reg-hint" style={{ display: 'block', marginBottom: '8px', fontSize: '13px', fontWeight: '600' }}>
+                <span className="reg-hint" style={{ display: 'block', marginBottom: '8px', fontSize: '13px', fontWeight: '600', color: '#ffffff', opacity: '0.9' }}>
                   (Grants, VC, Angel, Mentorship, Partnerships, etc.). Our speaker will aim to address these during the Q&A.
                 </span>
                 <textarea 
