@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS registrations (
   year VARCHAR(50) NOT NULL,
   phone VARCHAR(20) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
+  idea TEXT,
   payment_status VARCHAR(20) DEFAULT 'pending',
   payment_id VARCHAR(255),
   created_at TIMESTAMP DEFAULT NOW()

@@ -13,13 +13,26 @@ function Register() {
     rollNumber: '',
     year: '',
     phone: '',
-    email: ''
+    email: '',
+    idea: ''
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [wordCount, setWordCount] = useState(0);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleIdeaChange = (e) => {
+    const text = e.target.value;
+    const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+    const count = words.length;
+    
+    if (count <= 700) {
+      setFormData({ ...formData, idea: text });
+      setWordCount(count);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -39,7 +52,8 @@ function Register() {
             roll_number: formData.rollNumber,
             year: formData.year,
             phone: formData.phone,
-            email: formData.email
+            email: formData.email,
+            idea: formData.idea || null
           }
         ])
         .select();
@@ -182,6 +196,41 @@ function Register() {
                 <label htmlFor="email">Email ID</label>
                 <input id="email" name="email" type="email" placeholder="example@gmail.com" value={formData.email} onChange={handleChange} required />
                 <span className="reg-hint">This email will receive a copy of the e-ticket.</span>
+              </div>
+            </fieldset>
+
+            {/* Section: Share Your Idea (Optional) */}
+            <fieldset className="reg-fieldset">
+              <legend>
+                <span className="reg-legend-bar"></span>
+                Share Your Idea <span style={{ fontSize: '12px', fontWeight: 'normal', color: '#a1a1b5' }}>(Optional)</span>
+              </legend>
+
+              <div className="reg-field">
+                <label htmlFor="idea">Your Innovation Idea</label>
+                <textarea 
+                  id="idea" 
+                  name="idea" 
+                  rows="6"
+                  placeholder="Share your innovative idea or project concept here... (Optional)"
+                  value={formData.idea} 
+                  onChange={handleIdeaChange}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontFamily: 'inherit',
+                    resize: 'vertical',
+                    minHeight: '120px'
+                  }}
+                />
+                <span className="reg-hint">
+                  {wordCount}/700 words {wordCount >= 700 && '(Maximum limit reached)'}
+                </span>
               </div>
             </fieldset>
 

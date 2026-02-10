@@ -178,7 +178,7 @@ function Home() {
                   <div className="info-icon">🏢</div>
                   <div className="info-content">
                     <span className="info-label">Organized By</span>
-                    <p>Innovation & Incubation Cell (IIC)</p>
+                    <p>IIC-ISL</p>
                   </div>
                 </div>
                 <div className="info-card">
