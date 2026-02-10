@@ -31,230 +31,265 @@ export default function Ticket() {
   };
 
   const handleDownloadTicket = async () => {
-    // First, ensure QR code is rendered and get it
-    const qrCanvas = document.querySelector('.qr-container canvas');
-    
-    if (!qrCanvas) {
-      alert('QR code not ready. Please wait a moment and try again.');
-      return;
-    }
-
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-
-    // Gradient-like background using multiple rectangles
-    pdf.setFillColor(245, 245, 250);
-    pdf.rect(0, 0, 210, 297, 'F');
-
-    // Top gradient accent
-    pdf.setFillColor(108, 58, 237);
-    pdf.rect(0, 0, 210, 4, 'F');
-    
-    // Decorative corner elements
-    pdf.setFillColor(168, 85, 247);
-    pdf.circle(15, 15, 3, 'F');
-    pdf.circle(195, 15, 3, 'F');
-    pdf.circle(15, 282, 3, 'F');
-    pdf.circle(195, 282, 3, 'F');
-
-    // Main card background
-    pdf.setFillColor(255, 255, 255);
-    pdf.roundedRect(15, 20, 180, 257, 5, 5, 'F');
-    
-    // Card shadow effect
-    pdf.setDrawColor(200, 200, 220);
-    pdf.setLineWidth(0.2);
-    pdf.roundedRect(15, 20, 180, 257, 5, 5);
-
-    // Status Badge with gradient effect
-    pdf.setFillColor(6, 182, 212);
-    pdf.roundedRect(25, 30, 70, 10, 3, 3, 'F');
-    pdf.setFillColor(255, 255, 255);
-    pdf.circle(30, 35, 1.5, 'F');
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('REGISTRATION CONFIRMED', 60, 36, { align: 'center' });
-
-    // Title with decorative line
-    pdf.setTextColor(108, 58, 237);
-    pdf.setFontSize(26);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('R&D Orientation Program', 105, 55, { align: 'center' });
-
-    // Decorative line under title
-    pdf.setDrawColor(168, 85, 247);
-    pdf.setLineWidth(1);
-    pdf.line(60, 60, 150, 60);
-
-    // Subtitle
-    pdf.setTextColor(120, 120, 140);
-    pdf.setFontSize(13);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text('Faculty & Student Orientation', 105, 68, { align: 'center' });
-
-    // Event Details Cards
-    let yPos = 85;
-    const leftCol = 30;
-    const cardWidth = 75;
-    const cardHeight = 22;
-
-    // Date Card
-    pdf.setFillColor(250, 250, 255);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
-    pdf.setDrawColor(108, 58, 237);
-    pdf.setLineWidth(0.3);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
-    
-    pdf.setFontSize(9);
-    pdf.setTextColor(150, 150, 170);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('DATE', leftCol + 5, yPos + 7);
-    pdf.setTextColor(30, 30, 50);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(12);
-    pdf.text(eventDetails.date, leftCol + 5, yPos + 15);
-
-    // Time Card
-    yPos += 27;
-    pdf.setFillColor(250, 250, 255);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
-    pdf.setDrawColor(108, 58, 237);
-    pdf.setLineWidth(0.3);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
-    
-    pdf.setFontSize(9);
-    pdf.setTextColor(150, 150, 170);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('TIME', leftCol + 5, yPos + 7);
-    pdf.setTextColor(30, 30, 50);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(12);
-    pdf.text(eventDetails.time, leftCol + 5, yPos + 15);
-
-    // Venue Card
-    yPos += 27;
-    pdf.setFillColor(250, 250, 255);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight + 8, 3, 3, 'F');
-    pdf.setDrawColor(108, 58, 237);
-    pdf.setLineWidth(0.3);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight + 8, 3, 3);
-    
-    pdf.setFontSize(9);
-    pdf.setTextColor(150, 150, 170);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('VENUE', leftCol + 5, yPos + 7);
-    pdf.setTextColor(30, 30, 50);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(11);
-    pdf.text(eventDetails.venue, leftCol + 5, yPos + 15);
-    pdf.setFontSize(9);
-    pdf.setTextColor(120, 120, 140);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(eventDetails.college, leftCol + 5, yPos + 22);
-
-    // Ticket ID Card
-    yPos += 35;
-    pdf.setFillColor(250, 250, 255);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
-    pdf.setDrawColor(108, 58, 237);
-    pdf.setLineWidth(0.3);
-    pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
-    
-    pdf.setFontSize(9);
-    pdf.setTextColor(150, 150, 170);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('TICKET ID', leftCol + 5, yPos + 7);
-    pdf.setTextColor(6, 182, 212);
-    pdf.setFont('courier', 'bold');
-    pdf.setFontSize(10);
-    pdf.text(ticketId, leftCol + 5, yPos + 15);
-
-    // QR Code Section with enhanced design
-    const qrX = 120;
-    const qrY = 85;
-    const qrSize = 60;
-
-    // QR Background card with gradient effect
-    pdf.setFillColor(255, 255, 255);
-    pdf.roundedRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 25, 4, 4, 'F');
-    pdf.setDrawColor(168, 85, 247);
-    pdf.setLineWidth(0.5);
-    pdf.roundedRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 25, 4, 4);
-
-    // Add decorative corners to QR box
-    pdf.setDrawColor(108, 58, 237);
-    pdf.setLineWidth(1.5);
-    // Top-left corner
-    pdf.line(qrX - 3, qrY - 3, qrX + 5, qrY - 3);
-    pdf.line(qrX - 3, qrY - 3, qrX - 3, qrY + 5);
-    // Top-right corner
-    pdf.line(qrX + qrSize - 5, qrY - 3, qrX + qrSize + 3, qrY - 3);
-    pdf.line(qrX + qrSize + 3, qrY - 3, qrX + qrSize + 3, qrY + 5);
-    // Bottom-left corner
-    pdf.line(qrX - 3, qrY + qrSize - 5, qrX - 3, qrY + qrSize + 3);
-    pdf.line(qrX - 3, qrY + qrSize + 3, qrX + 5, qrY + qrSize + 3);
-    // Bottom-right corner
-    pdf.line(qrX + qrSize - 5, qrY + qrSize + 3, qrX + qrSize + 3, qrY + qrSize + 3);
-    pdf.line(qrX + qrSize + 3, qrY + qrSize - 5, qrX + qrSize + 3, qrY + qrSize + 3);
-
-    // Convert QR canvas to high quality image and add to PDF
     try {
-      const qrImageData = qrCanvas.toDataURL('image/png', 1.0);
-      pdf.addImage(qrImageData, 'PNG', qrX, qrY, qrSize, qrSize, undefined, 'FAST');
+      // Wait for QR code to render
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Get the SVG element
+      const qrSvg = document.querySelector('.qr-container svg');
+      
+      if (!qrSvg) {
+        alert('QR code not ready. Please refresh the page and try again.');
+        return;
+      }
+
+      // Convert SVG to canvas for PDF
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const svgData = new XMLSerializer().serializeToString(qrSvg);
+      const img = new Image();
+      
+      // Set canvas size to match QR code
+      canvas.width = 240;
+      canvas.height = 240;
+      
+      // Create blob from SVG
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      
+      img.onload = function() {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        
+        // Get QR code as image data
+        const qrImageData = canvas.toDataURL('image/png', 1.0);
+        
+        // Generate PDF
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4'
+        });
+
+        // Gradient-like background using multiple rectangles
+        pdf.setFillColor(245, 245, 250);
+        pdf.rect(0, 0, 210, 297, 'F');
+
+        // Top gradient accent
+        pdf.setFillColor(108, 58, 237);
+        pdf.rect(0, 0, 210, 4, 'F');
+        
+        // Decorative corner elements
+        pdf.setFillColor(168, 85, 247);
+        pdf.circle(15, 15, 3, 'F');
+        pdf.circle(195, 15, 3, 'F');
+        pdf.circle(15, 282, 3, 'F');
+        pdf.circle(195, 282, 3, 'F');
+
+        // Main card background
+        pdf.setFillColor(255, 255, 255);
+        pdf.roundedRect(15, 20, 180, 257, 5, 5, 'F');
+        
+        // Card shadow effect
+        pdf.setDrawColor(200, 200, 220);
+        pdf.setLineWidth(0.2);
+        pdf.roundedRect(15, 20, 180, 257, 5, 5);
+
+        // Status Badge with gradient effect
+        pdf.setFillColor(6, 182, 212);
+        pdf.roundedRect(25, 30, 70, 10, 3, 3, 'F');
+        pdf.setFillColor(255, 255, 255);
+        pdf.circle(30, 35, 1.5, 'F');
+        pdf.setTextColor(255, 255, 255);
+        pdf.setFontSize(9);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('REGISTRATION CONFIRMED', 60, 36, { align: 'center' });
+
+        // Title with decorative line
+        pdf.setTextColor(108, 58, 237);
+        pdf.setFontSize(26);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('R&D Orientation Program', 105, 55, { align: 'center' });
+
+        // Decorative line under title
+        pdf.setDrawColor(168, 85, 247);
+        pdf.setLineWidth(1);
+        pdf.line(60, 60, 150, 60);
+
+        // Subtitle
+        pdf.setTextColor(120, 120, 140);
+        pdf.setFontSize(13);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text('Faculty & Student Orientation', 105, 68, { align: 'center' });
+
+        // Event Details Cards
+        let yPos = 85;
+        const leftCol = 30;
+        const cardWidth = 75;
+        const cardHeight = 22;
+
+        // Date Card
+        pdf.setFillColor(250, 250, 255);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
+        pdf.setDrawColor(108, 58, 237);
+        pdf.setLineWidth(0.3);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
+        
+        pdf.setFontSize(9);
+        pdf.setTextColor(150, 150, 170);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('DATE', leftCol + 5, yPos + 7);
+        pdf.setTextColor(30, 30, 50);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text(eventDetails.date, leftCol + 5, yPos + 15);
+
+        // Time Card
+        yPos += 27;
+        pdf.setFillColor(250, 250, 255);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
+        pdf.setDrawColor(108, 58, 237);
+        pdf.setLineWidth(0.3);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
+        
+        pdf.setFontSize(9);
+        pdf.setTextColor(150, 150, 170);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('TIME', leftCol + 5, yPos + 7);
+        pdf.setTextColor(30, 30, 50);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text(eventDetails.time, leftCol + 5, yPos + 15);
+
+        // Venue Card
+        yPos += 27;
+        pdf.setFillColor(250, 250, 255);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight + 8, 3, 3, 'F');
+        pdf.setDrawColor(108, 58, 237);
+        pdf.setLineWidth(0.3);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight + 8, 3, 3);
+        
+        pdf.setFontSize(9);
+        pdf.setTextColor(150, 150, 170);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('VENUE', leftCol + 5, yPos + 7);
+        pdf.setTextColor(30, 30, 50);
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(11);
+        pdf.text(eventDetails.venue, leftCol + 5, yPos + 15);
+        pdf.setFontSize(9);
+        pdf.setTextColor(120, 120, 140);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text(eventDetails.college, leftCol + 5, yPos + 22);
+
+        // Ticket ID Card
+        yPos += 35;
+        pdf.setFillColor(250, 250, 255);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3, 'F');
+        pdf.setDrawColor(108, 58, 237);
+        pdf.setLineWidth(0.3);
+        pdf.roundedRect(leftCol, yPos, cardWidth, cardHeight, 3, 3);
+        
+        pdf.setFontSize(9);
+        pdf.setTextColor(150, 150, 170);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('TICKET ID', leftCol + 5, yPos + 7);
+        pdf.setTextColor(6, 182, 212);
+        pdf.setFont('courier', 'bold');
+        pdf.setFontSize(10);
+        pdf.text(ticketId, leftCol + 5, yPos + 15);
+
+        // QR Code Section with enhanced design
+        const qrX = 120;
+        const qrY = 85;
+        const qrSize = 60;
+
+        // QR Background card with gradient effect
+        pdf.setFillColor(255, 255, 255);
+        pdf.roundedRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 25, 4, 4, 'F');
+        pdf.setDrawColor(168, 85, 247);
+        pdf.setLineWidth(0.5);
+        pdf.roundedRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 25, 4, 4);
+
+        // Add decorative corners to QR box
+        pdf.setDrawColor(108, 58, 237);
+        pdf.setLineWidth(1.5);
+        // Top-left corner
+        pdf.line(qrX - 3, qrY - 3, qrX + 5, qrY - 3);
+        pdf.line(qrX - 3, qrY - 3, qrX - 3, qrY + 5);
+        // Top-right corner
+        pdf.line(qrX + qrSize - 5, qrY - 3, qrX + qrSize + 3, qrY - 3);
+        pdf.line(qrX + qrSize + 3, qrY - 3, qrX + qrSize + 3, qrY + 5);
+        // Bottom-left corner
+        pdf.line(qrX - 3, qrY + qrSize - 5, qrX - 3, qrY + qrSize + 3);
+        pdf.line(qrX - 3, qrY + qrSize + 3, qrX + 5, qrY + qrSize + 3);
+        // Bottom-right corner
+        pdf.line(qrX + qrSize - 5, qrY + qrSize + 3, qrX + qrSize + 3, qrY + qrSize + 3);
+        pdf.line(qrX + qrSize + 3, qrY + qrSize - 5, qrX + qrSize + 3, qrY + qrSize + 3);
+
+        // Add QR code to PDF
+        pdf.addImage(qrImageData, 'PNG', qrX, qrY, qrSize, qrSize, undefined, 'FAST');
+        
+        // QR Label
+        pdf.setFontSize(8);
+        pdf.setTextColor(100, 100, 120);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('SCAN FOR INVOICE', qrX + qrSize/2, qrY + qrSize + 10, { align: 'center' });
+
+        // Important Note Box with icon
+        yPos = 215;
+        pdf.setFillColor(248, 245, 255);
+        pdf.roundedRect(25, yPos, 160, 25, 3, 3, 'F');
+        pdf.setDrawColor(168, 85, 247);
+        pdf.setLineWidth(1);
+        pdf.line(25, yPos, 25, yPos + 25);
+        
+        // Info icon
+        pdf.setDrawColor(168, 85, 247);
+        pdf.setLineWidth(0.5);
+        pdf.circle(35, yPos + 12, 3);
+        pdf.setFontSize(10);
+        pdf.setTextColor(168, 85, 247);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('i', 35, yPos + 13.5, { align: 'center' });
+        
+        pdf.setFontSize(10);
+        pdf.setTextColor(80, 80, 100);
+        pdf.setFont('helvetica', 'normal');
+        const noteText = 'Scan the QR code above to download your invoice with complete registration details';
+        const noteLines = pdf.splitTextToSize(noteText, 140);
+        pdf.text(noteLines, 45, yPos + 10);
+
+        // Decorative wave pattern at bottom
+        pdf.setDrawColor(168, 85, 247);
+        pdf.setLineWidth(0.3);
+        for (let i = 0; i < 8; i++) {
+          const waveY = 250 + Math.sin(i) * 2;
+          pdf.line(25 + i * 20, waveY, 25 + (i + 1) * 20, 250 + Math.sin(i + 1) * 2);
+        }
+
+        // Footer
+        pdf.setFontSize(10);
+        pdf.setTextColor(150, 150, 170);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text('Made with love by IIC Innovation Team', 105, 265, { align: 'center' });
+
+        // Save PDF
+        pdf.save(`Ticket-${ticketId}.pdf`);
+      };
+      
+      img.onerror = function() {
+        alert('Failed to load QR code. Please try again.');
+      };
+      
+      img.src = url;
+      
     } catch (error) {
-      console.error('Error adding QR code:', error);
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF: ' + error.message);
     }
-    
-    // QR Label
-    pdf.setFontSize(8);
-    pdf.setTextColor(100, 100, 120);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('SCAN FOR INVOICE', qrX + qrSize/2, qrY + qrSize + 10, { align: 'center' });
-
-    // Important Note Box with icon
-    yPos = 215;
-    pdf.setFillColor(248, 245, 255);
-    pdf.roundedRect(25, yPos, 160, 25, 3, 3, 'F');
-    pdf.setDrawColor(168, 85, 247);
-    pdf.setLineWidth(1);
-    pdf.line(25, yPos, 25, yPos + 25);
-    
-    // Info icon
-    pdf.setDrawColor(168, 85, 247);
-    pdf.setLineWidth(0.5);
-    pdf.circle(35, yPos + 12, 3);
-    pdf.setFontSize(10);
-    pdf.setTextColor(168, 85, 247);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('i', 35, yPos + 13.5, { align: 'center' });
-    
-    pdf.setFontSize(10);
-    pdf.setTextColor(80, 80, 100);
-    pdf.setFont('helvetica', 'normal');
-    const noteText = 'Scan the QR code above to download your invoice with complete registration details';
-    const noteLines = pdf.splitTextToSize(noteText, 140);
-    pdf.text(noteLines, 45, yPos + 10);
-
-    // Decorative wave pattern at bottom
-    pdf.setDrawColor(168, 85, 247);
-    pdf.setLineWidth(0.3);
-    for (let i = 0; i < 8; i++) {
-      const waveY = 250 + Math.sin(i) * 2;
-      pdf.line(25 + i * 20, waveY, 25 + (i + 1) * 20, 250 + Math.sin(i + 1) * 2);
-    }
-
-    // Footer with icon
-    pdf.setFontSize(10);
-    pdf.setTextColor(150, 150, 170);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text('Made with love by IIC Innovation Team', 105, 265, { align: 'center' });
-
-    // Save PDF
-    pdf.save(`Ticket-${ticketId}.pdf`);
   };
 
   return (
