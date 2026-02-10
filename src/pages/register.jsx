@@ -199,20 +199,23 @@ function Register() {
               </div>
             </fieldset>
 
-            {/* Section: Share Your Idea (Optional) */}
+            {/* Section: Funding & Support Inquiry (Optional) */}
             <fieldset className="reg-fieldset">
               <legend>
                 <span className="reg-legend-bar"></span>
-                Share Your Idea <span style={{ fontSize: '12px', fontWeight: 'normal', color: '#a1a1b5' }}>(Optional)</span>
+                Funding & Support Inquiry <span style={{ fontSize: '12px', fontWeight: 'normal', color: '#a1a1b5' }}>(Optional)</span>
               </legend>
 
               <div className="reg-field">
-                <label htmlFor="idea">Your Innovation Idea</label>
+                <label htmlFor="idea">Tell us briefly about your project and what kind of support you're looking for</label>
+                <span className="reg-hint" style={{ display: 'block', marginBottom: '8px', fontSize: '13px', fontWeight: '600' }}>
+                  (Grants, VC, Angel, Mentorship, Partnerships, etc.). Our speaker will aim to address these during the Q&A.
+                </span>
                 <textarea 
                   id="idea" 
                   name="idea" 
                   rows="6"
-                  placeholder="Share your innovative idea or project concept here... (Optional)"
+                  placeholder="e.g., I am looking for seed funding for a biotech startup..."
                   value={formData.idea} 
                   onChange={handleIdeaChange}
                   style={{

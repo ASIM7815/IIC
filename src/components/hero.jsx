@@ -6,7 +6,7 @@ function Hero() {
       <div className="hero-content">
         <div className="hero-badge reveal">
           <span className="badge-dot"></span>
-          Innovation & Incubation Cell (IIC)
+          IIC
         </div>
         <h1 className="hero-title reveal">
           <span className="title-line">ISL Engineering</span>
