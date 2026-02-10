@@ -26,7 +26,7 @@ function Hero() {
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item">
-            <span className="stat-number">2:10</span>
+            <span className="stat-number">1:45</span>
             <span className="stat-label">PM Start</span>
           </div>
         </div>

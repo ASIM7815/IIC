@@ -230,7 +230,7 @@ function Home() {
                   <div className="detail-icon-ring"></div>
                 </div>
                 <h3>Time</h3>
-                <p className="detail-value">2:10 PM</p>
+                <p className="detail-value">1:45 PM</p>
                 <p className="detail-sub">IST</p>
               </div>
               <div className="detail-card glass-card reveal">
@@ -315,7 +315,7 @@ function Home() {
                   <p>Don't miss this opportunity to be part of something extraordinary. Register now and secure your spot!</p>
                   <div className="cta-meta">
                     <span>🎓 College Event</span>
-                    <span>📅 Feb 12, 2:10 PM</span>
+                    <span>📅 Feb 12, 1:45 PM</span>
                     <span>📍 Hyderabad</span>
                   </div>
                   <Link to="/register" className="btn btn-primary btn-lg">

@@ -24,7 +24,7 @@ export default function Ticket() {
     title: 'R&D Orientation Program',
     subtitle: 'Faculty & Student Orientation',
     date: '12 February, 2026',
-    time: '2:10 PM',
+    time: '1:45 PM',
     venue: 'Seminar Hall - 1, Ground Floor',
     college: 'ISL Engineering College',
     description: 'Join us for an insightful orientation covering the R&D program objectives and expectations.'
