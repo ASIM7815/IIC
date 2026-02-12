@@ -19,6 +19,9 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const [wordCount, setWordCount] = useState(0);
+  
+  // Registration closed flag
+  const isRegistrationClosed = true; // Set to false to open registration
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -86,6 +89,71 @@ function Register() {
       setLoading(false);
     }
   };
+  
+  // If registration is closed, show closed message
+  if (isRegistrationClosed) {
+    return (
+      <div className="reg-page">
+        {/* Animated Background */}
+        <div className="reg-bg">
+          <div className="reg-orb reg-orb-1"></div>
+          <div className="reg-orb reg-orb-2"></div>
+          <div className="reg-orb reg-orb-3"></div>
+          <div className="reg-grid-overlay"></div>
+        </div>
+
+        {/* Back Navigation */}
+        <nav className="reg-nav">
+          <Link to="/" className="reg-back-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Event
+          </Link>
+        </nav>
+
+        {/* Registration Closed Message */}
+        <main className="reg-main">
+          <div className="reg-card" style={{ maxWidth: '600px', textAlign: 'center' }}>
+            <div className="reg-header">
+              <div className="reg-icon" style={{ background: 'rgba(239, 68, 68, 0.1)' }}>
+                <span style={{ fontSize: '48px' }}>🔒</span>
+                <div className="reg-icon-ring" style={{ borderColor: 'rgba(239, 68, 68, 0.3)' }}></div>
+              </div>
+              <h1 style={{ fontSize: '32px', marginBottom: '16px' }}>Registration Closed</h1>
+              <p className="reg-subtitle" style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: '24px' }}>
+                Thank you for your interest in the R&D Orientation Program. 
+                Registration for this event has been closed.
+              </p>
+              <div style={{ 
+                padding: '20px', 
+                background: 'rgba(168, 85, 247, 0.08)', 
+                borderRadius: '12px',
+                border: '1px solid rgba(168, 85, 247, 0.2)',
+                marginTop: '24px'
+              }}>
+                <p style={{ fontSize: '14px', color: '#a1a1b5', lineHeight: '1.6' }}>
+                  Stay tuned for future events and opportunities. 
+                  Follow us for updates on upcoming programs and workshops.
+                </p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '32px' }}>
+              <Link to="/" className="reg-submit" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                <span>Back to Home</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="reg-footer">
+          <p>Made by IIC INNOVATION TEAM WITH LOVE</p>
+        </footer>
+      </div>
+    );
+  }
+  
   return (
     <div className="reg-page">
       {/* Animated Background */}
